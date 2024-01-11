@@ -9,15 +9,17 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  background-color: #121212; /* Dark background for the container */
+  color: #fff; /* Light text color */
 `;
 
 const Card = styled.div`
   width: 300px;
-  border: 1px solid #ddd;
+  border: 1px solid #333; /* Darker border for the card */
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Adjusted shadow for dark mode */
+  background-color: #1e1e1e; /* Dark background for the card */
 `;
 
 const CardImage = styled.img`
@@ -32,21 +34,23 @@ const CardContent = styled.div`
 
 const Title = styled.h2`
   margin: 10px 0;
+  color: #fff; /* Light text color */
 `;
 
 const Divider = styled.hr`
   border: 0;
   height: 1px;
-  background: #ddd;
+  background: #333; /* Darker divider */
   margin: 10px 0;
 `;
 
 const Subtitle = styled.h3`
   margin: 5px 0;
+  color: #ccc; /* Slightly lighter text color for contrast */
 `;
 
 const Text = styled.p`
-  color: #666;
+  color: #aaa; /* Lighter text color */
 `;
 
 const Author = styled.div`
@@ -64,6 +68,7 @@ const AuthorAvatar = styled.img`
 
 const AuthorName = styled.span`
   font-weight: bold;
+  color: #fff; /* Light text color */
 `;
 
 function App() {
