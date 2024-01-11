@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import coverImage from './assets/card-image.jpg';
+import avatarImage from './assets/card-avatar.jpg';
 
 // Styled components
 const Card = styled.div`
@@ -65,13 +67,13 @@ function App() {
   return (
     <Card>
       <Logo src="https://via.placeholder.com/50" alt="Logo" />
-      <CardImage src="https://via.placeholder.com/300x150" alt="Card Image" />
+      <CardImage src={coverImage} alt="Card Image" />
       <Title>Card Title</Title>
       <Divider />
       <Subtitle>Card Subtitle</Subtitle>
       <Text>This is the card text. It can be longer and wrap across multiple lines.</Text>
       <Author>
-        <AuthorAvatar src="https://via.placeholder.com/30" alt="Author" />
+        <AuthorAvatar src={avatarImage} alt="Author" />
         <AuthorName>Author Name</AuthorName>
       </Author>
     </Card>
