@@ -56,17 +56,9 @@ const AuthorName = styled.span`
   font-weight: bold;
 `;
 
-const Logo = styled.img`
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 50px;
-`;
-
 function App() {
   return (
     <Card>
-      <Logo src="https://via.placeholder.com/50" alt="Logo" />
       <CardImage src={coverImage} alt="Card Image" />
       <Title>Card Title</Title>
       <Divider />
