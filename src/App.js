@@ -4,12 +4,18 @@ import coverImage from './assets/card-image.jpg';
 import avatarImage from './assets/card-avatar.jpg';
 
 // Styled components
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+`;
+
 const Card = styled.div`
   width: 300px;
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
-  padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
 `;
@@ -18,6 +24,10 @@ const CardImage = styled.img`
   width: 100%;
   height: 150px;
   object-fit: cover;
+`;
+
+const CardContent = styled.div`
+  padding: 20px;
 `;
 
 const Title = styled.h2`
@@ -58,17 +68,21 @@ const AuthorName = styled.span`
 
 function App() {
   return (
-    <Card>
-      <CardImage src={coverImage} alt="Card Image" />
-      <Title>Card Title</Title>
-      <Divider />
-      <Subtitle>Card Subtitle</Subtitle>
-      <Text>This is the card text. It can be longer and wrap across multiple lines.</Text>
-      <Author>
-        <AuthorAvatar src={avatarImage} alt="Author" />
-        <AuthorName>Author Name</AuthorName>
-      </Author>
-    </Card>
+    <Container>
+      <Card>
+        <CardImage src={coverImage} alt="Card Image" />
+        <CardContent>
+          <Title>Card Title</Title>
+          <Divider />
+          <Subtitle>Card Subtitle</Subtitle>
+          <Text>This is the card text. It can be longer and wrap across multiple lines.</Text>
+          <Author>
+            <AuthorAvatar src={avatarImage} alt="Author" />
+            <AuthorName>Author Name</AuthorName>
+          </Author>
+        </CardContent>
+      </Card>
+    </Container>
   );
 }
 
