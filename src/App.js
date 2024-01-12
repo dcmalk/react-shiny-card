@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import coverImage from './assets/card-image.jpg';
 import avatarImage from './assets/card-avatar.jpg';
@@ -15,6 +15,7 @@ const Container = styled.div`
   background-position: center center;
   background-repeat: no-repeat;
   color: #fff;
+  perspective: 1000px;
 `;
 
 const Card = styled.div`
@@ -25,6 +26,10 @@ const Card = styled.div`
   border-radius: 10px;
   box-shadow: 0px 30px 60px 0px rgba(0, 0, 0, 0.5), 0px 30px 60px 0px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  transform: ${(props) => `${props.transform} scale(${props.scale})`};
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 `;
 
 const CardImage = styled.img`
@@ -40,7 +45,7 @@ const CardContent = styled.div`
 `;
 
 const Title = styled.h2`
-  margin: 16px 0 10px 0;
+  margin: 10px 0 4px 0;
   color: #fff;
   font-size: 17px;
   font-weight: 600;
@@ -86,18 +91,50 @@ const AuthorName = styled.span`
 `;
 
 function App() {
+  const [transform, setTransform] = useState('');
+  const [scale, setScale] = useState(1);
+  const cardRef = useRef(null);
+
+  useEffect(() => {
+    const handleMouseMove = (event) => {
+      if (cardRef.current) {
+        const rect = cardRef.current.getBoundingClientRect();
+        const x = ((event.clientX - rect.left) / rect.width - 0.5) * 20;
+        const y = ((event.clientY - rect.top) / rect.height - 0.5) * 20;
+        setTransform(`rotateY(${x}deg) rotateX(${y}deg)`);
+      }
+    };
+
+    const handleMouseEnter = () => setScale(1.1);
+    const handleMouseLeave = () => {
+      setTransform('');
+      setScale(1);
+    };
+
+    const cardElement = cardRef.current;
+    cardElement.addEventListener('mousemove', handleMouseMove);
+    cardElement.addEventListener('mouseenter', handleMouseEnter);
+    cardElement.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      cardElement.removeEventListener('mousemove', handleMouseMove);
+      cardElement.removeEventListener('mouseenter', handleMouseEnter);
+      cardElement.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+
   return (
     <Container>
-      <Card>
+      <Card ref={cardRef} transform={transform} scale={scale}>
         <CardImage src={coverImage} alt="Card Image" />
         <CardContent>
-          <Title>Card Title</Title>
+          <Title>React Shiny Card</Title>
           <Divider />
-          <Subtitle>Card Subtitle</Subtitle>
-          <Text>This is the card text. It can be longer and wrap across multiple lines.</Text>
+          <Subtitle>Demo Project</Subtitle>
+          <Text>A demonstration of using ChatGPT to assist in creating React-based graphical interfaces.</Text>
           <Author>
             <AuthorAvatar src={avatarImage} alt="Author" />
-            <AuthorName>Author Name</AuthorName>
+            <AuthorName>Damon Malkiewicz</AuthorName>
           </Author>
         </CardContent>
       </Card>
